@@ -39,6 +39,7 @@ class VerticalStackInCard extends HTMLElement {
 
     // create the button
     const toggleButton = this.createToggleButton()
+    this.toggleButton = toggleButton;
 
     card.appendChild(toggleButton);
     card.appendChild(cardList);
@@ -62,7 +63,7 @@ class VerticalStackInCard extends HTMLElement {
     toggleButton.className = 'card-content toggle-button-' + this.id
     toggleButton.addEventListener('click', () => {
       this.isToggled = !this.isToggled
-      this.styleCard(this.isToggled)
+      this.toggleCard(this.isToggled)
     })
 
     const icon = document.createElement('ha-icon');
@@ -74,7 +75,8 @@ class VerticalStackInCard extends HTMLElement {
     return toggleButton
   }
 
-  styleCard(isToggled) {
+  toggleCard(isToggled) {
+    this.toggleButton.classList[isToggled ? 'add' : 'remove']('is-toggled')
     this.cardList.classList[isToggled ? 'add' : 'remove']('is-toggled')
     this.icon.setAttribute('icon', isToggled ? 'mdi:chevron-up' : 'mdi:chevron-down')
   }
@@ -161,7 +163,6 @@ class VerticalStackInCard extends HTMLElement {
       .toggle-button-${this.id} {
         color: var(--primary-text-color);
         text-align: left;
-        background: none;
         border: none;
         margin: 0;
         display: flex;
@@ -171,9 +172,14 @@ class VerticalStackInCard extends HTMLElement {
         border-radius: var(--ha-card-border-radius, 4px);
         ${this._config.buttonStyle || ''}
       }
+
+      .toggle-button-${this.id}.is-toggled {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
       .toggle-button-${this.id}:focus {
         outline: none;
-        background-color: var(--divider-color);
       }
 
       .card-list-${this.id} {
@@ -186,10 +192,6 @@ class VerticalStackInCard extends HTMLElement {
 
       .toggle-button__icon-${this.id} {
         color: var(--paper-item-icon-color, #aaa);
-      }
-
-      .type-custom-collapsable-cards {
-        background: transparent;
       }
     `;
   }

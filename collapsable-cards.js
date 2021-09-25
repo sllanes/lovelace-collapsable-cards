@@ -170,6 +170,7 @@ class VerticalStackInCard extends HTMLElement {
         align-items: center;
         width: 100%;
         border-radius: var(--ha-card-border-radius, 4px);
+        background: var(--ha-card-background, var(--card-background-color, white));
         ${this._config.buttonStyle || ''}
       }
 
@@ -188,6 +189,11 @@ class VerticalStackInCard extends HTMLElement {
 
       .card-list-${this.id}.is-toggled {
         display: block;
+      }
+
+      .card-list-${this.id}.is-toggled .type-entities {
+        border-top-left-radius: 0;
+        border-right-right-radius: 0;
       }
 
       .toggle-button__icon-${this.id} {

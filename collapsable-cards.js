@@ -191,11 +191,6 @@ class VerticalStackInCard extends HTMLElement {
         display: block;
       }
 
-      .card-list-${this.id}.is-toggled .type-entities {
-        border-top-left-radius: 0;
-        border-right-right-radius: 0;
-      }
-
       .toggle-button__icon-${this.id} {
         color: var(--paper-item-icon-color, #aaa);
       }
